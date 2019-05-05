@@ -17,14 +17,14 @@ window.onload = function() {
             },
             attack: function(min, max) {
                 this.playerAttacks(min, max);
+                if (this.checkWin()) {
+                    return;
+                }
                 this.monsterAttacks(min, max);
             },
             playerAttacks: function(min, max) {
                 let damage = this.randInt(min, max);
                 this.monster.health -= damage;
-                if (this.checkWin()) {
-                    return;
-                }
                 this.turns.unshift({
                     isPlayer: true,
                     text: `Player hits monster for ${damage}`,

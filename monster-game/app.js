@@ -33,14 +33,13 @@ window.onload = function() {
             monsterAttacks: function(min, max) {
                 let damage = this.randInt(min, max);
                 this.player.health -= damage;
-                this.checkWin();
                 this.turns.unshift({
                     isPlayer: false,
                     text: `Monster hits player for ${damage}`,
                 });
+                this.checkWin();
             },
             heal: function() {
-                this.monsterAttacks(0, 10);
                 let health = this.randInt(2, 10);
                 if (this.player.health + health <= 100) {
                     this.player.health += health;
@@ -49,7 +48,7 @@ window.onload = function() {
                         text: `Player heals for ${health}`,
                     });
                 }
-                this.checkWin();
+                this.monsterAttacks(0, 10);
             },
             giveUp: function() {
                 this.gameRunning = false;
@@ -76,6 +75,7 @@ window.onload = function() {
                 this.gameRunning = true;
                 this.player.health = 100;
                 this.monster.health = 100;
+                this.turns = [];
             },
         },
     });
